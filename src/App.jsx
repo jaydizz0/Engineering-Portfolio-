@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 
 {/* ========================================= */}
 {/* DATA STORAGE (EASY EDIT LISTS)            */}
@@ -11,142 +11,233 @@ const skills = [
 const projectData = {
   opencv: {
     title: "Computer Vision Robotic Arm",
-    status: "Planned / Early WIP",
-    role: "Lead Mechatronics Designer",
-    overview: "Designing and building an automated 4-DOF robotic arm system capable of physically sorting varied waste materials based on visual inputs.",
-    images: ["/images/opencv-concept.jpg"],
+    label: "Project",
+    role: "Mechanical & Systems Design",
+    status: "ACTIVE WIP",
+    overview: "Designing an autonomous robotic arm powered by a Raspberry Pi and OpenCV. Currently focused on the mechanical design and kinematic planning, laying a rigid physical foundation before integrating vision tracking and servo control.",
+    images: [
+      "/images/wip-placeholder.jpg",
+      "/images/cv-kinematics.jpg",
+      "/images/cv-components.jpg"
+    ],
     workflow: [
       {
-        step: "1. Problem & Research",
-        icon: "🔍",
-        description: "Defined the challenge: A system to identify and manipulate materials with different physical surface properties. Research focused on adaptive grippers and industrial sorting techniques.",
-        photos: [{ src: "/images/opencv-sorting-problem.jpg", caption: "Industrial waste complexity" }]
+        icon: "👁️",
+        step: "01. Architecture Definition",
+        description: "Established the overall system architecture. Defined the goal of bridging a Raspberry Pi camera feed with OpenCV to eventually translate 2D pixel coordinates into physical servo actuation.",
+        photos: [{ src: "/images/cv-diagram.jpg", caption: "System architecture" }, { src: "/images/cv-concept.jpg", caption: "Control flow" }]
       },
       {
-        step: "2. Requirements & Specs",
-        icon: "📋",
-        description: "Crucial requirements: 4 Degree of Freedom (DOF), minimum payload of 200g, and zero positional lag between vision processing and motor actuation.",
-        photos: [{ src: "/images/opencv-requirements.jpg", caption: "Load calculation spreadsheet" }]
+        icon: "⚙️",
+        step: "02. Component & Torque Specs",
+        description: "Calculated required servo torque for the expected arm load and reach. Researched power distribution methods to ensure the Raspberry Pi logic circuits will remain protected from servo voltage spikes.",
+        photos: [{ src: "/images/cv-calculations.jpg", caption: "Torque math" }, { src: "/images/cv-motors.jpg", caption: "Servo selection" }]
       },
       {
-        step: "3. Brainstorm & Architect",
-        icon: "💡",
-        description: "Chose a parallel gripper for robustness. Designed a dual-controller layout: Raspberry Pi for vision (OpenCV) and an ESP32 for dedicated servo control.",
-        photos: [
-          { src: "/images/opencv-brainstorm.jpg", caption: "Gripper architecture options" },
-          { src: "/images/opencv-system-wiring.jpg", caption: "Dual-controller architecture diagram" }
-        ]
+        icon: "📐",
+        step: "03. Mechanical Design [CURRENT]",
+        description: "Currently designing the physical arm structure in CAD. Focusing on joint rigidity, minimizing backlash for accurate positioning, and ensuring the camera mount will provide an unobstructed view of the workspace.",
+        photos: [{ src: "/images/wip-placeholder.jpg", caption: "Current CAD model" }, { src: "/images/cv-joint-design.jpg", caption: "Linkage design" }]
       },
       {
-        step: "4. Develop & Prototype",
-        icon: "🛠️",
-        description: "Modeled in SolidWorks (v2024). Components were 3D printed with PLA. Developed ESP32 control firmware to handle kinematic instructions.",
-        photos: [{ src: "/images/opencv-cad-assembly.jpg", caption: "Full SolidWorks assembly" }]
+        icon: "⚡",
+        step: "04. Assembly & Wiring [PLANNED]",
+        description: "The next phase involves fabricating the structural components, mounting the servos, and establishing a safe, common-ground electrical circuit to handle the power draw.",
+        photos: [{ src: "/images/cv-fabrication.jpg", caption: "Fabrication prep" }, { src: "/images/cv-wiring-plan.jpg", caption: "Circuit diagram" }]
       },
       {
-        step: "5. [CURRENT PHASE] Test Solution",
-        icon: "🧪",
-        description: "Current testing exposed slippage on aluminum cans. Currently redesigning gripper geometry based on physical force-curve data.",
-        photos: [{ src: "/images/opencv-failed-gripper-test.jpg", caption: "Physical test: Gripper slippage" }]
+        icon: "💻",
+        step: "05. OpenCV Integration [PLANNED]",
+        description: "The final phase will integrate the software environment. Planned milestones include color/object detection, contour mapping, and writing the control loop to physically move the arm toward targeted coordinates.",
+        photos: [{ src: "/images/cv-tracking-test.jpg", caption: "Vision tracking" }, { src: "/images/cv-future.jpg", caption: "Final integration" }]
       }
     ]
   },
 
   cprt: {
     title: "CPRT Rover Arm",
-    status: "Ongoing",
-    role: "Mechanical Contributor",
-    overview: "Developing a robust 4-DOF robotic arm for the Carleton Planetary Robotics Team to compete in international rover competitions (CIRC/URC).",
-    images: ["/images/cprt-rover-arm.jpg"],
+    label: "2025 Design Team",
+    role: "Mechanical Designer",
+    status: "COMPLETED",
+    overview: "Developed a 4-DOF robotic arm for the Carleton Planetary Robotics Team to compete in the CIRC and URC international rover competitions. Focused on high-torque harmonic drives, backlash reduction, and weight optimization.",
+    images: [
+      "/images/cprt-render-1.jpg",
+      "/images/cprt-assembly.jpg",
+      "/images/cprt-fea.jpg",
+      "/images/cprt-final-arm.jpg"
+    ],
     workflow: [
       {
-        step: "1. Define Problem",
-        icon: "🚀",
-        description: "The arm must maintain precision for fine motor tasks like flipping switches or retrieving soil samples in harsh planetary simulation environments.",
-        photos: [{ src: "/images/cprt-urc-requirements.jpg", caption: "Competition Rulebook Analysis" }]
+        icon: "🛰️",
+        step: "01. Subsystem Requirements",
+        description: "Defined mechanical requirements for a planetary rover arm, prioritizing payload capacity, weight restrictions, and precise kinematic movement while integrating seamlessly with the existing rover chassis.",
+        photos: [{ src: "/images/cprt-specs.jpg", caption: "Arm specifications" }, { src: "/images/cprt-rover.jpg", caption: "Chassis integration points" }]
       },
       {
-        step: "2. Specify Requirements",
-        icon: "📐",
-        description: "Strict mass limits required aggressive weight reduction. Target: 5kg max lift at full extension while maintaining high safety factors.",
-        photos: [{ src: "/images/cprt-torque-calcs.jpg", caption: "Joint Torque & Statics Analysis" }]
+        icon: "🔍",
+        step: "02. Trade Studies & Research",
+        description: "Conducted deep research into harmonic drives and gear reductions to solve backlash issues. Evaluated tradeoffs between weight, torque capacity, and manufacturability for joint linkages and structural components.",
+        photos: [{ src: "/images/cprt-research.jpg", caption: "Harmonic drive analysis" }, { src: "/images/cprt-materials.jpg", caption: "Material selection" }]
       },
       {
-        step: "3. Brainstorm & Design",
         icon: "🖥️",
-        description: "Designed a 4-DOF arm in SolidWorks. Utilized planetary gearboxes and high-torque brushless motors for the shoulder and elbow joints.",
-        photos: [{ src: "/images/cprt-arm-cad.jpg", caption: "SolidWorks Main Assembly" }]
+        step: "03. CAD & Simulation",
+        description: "Developed detailed SolidWorks models utilizing box tube and plate construction for optimal strength-to-weight ratios. Ran simulations to analyze deflection, stiffness, and expected load tolerances.",
+        photos: [{ src: "/images/cprt-cad.jpg", caption: "Joint CAD" }, { src: "/images/cprt-stress.jpg", caption: "FEA stress testing" }]
       },
       {
-        step: "4. Develop & Prototype",
-        icon: "🏗️",
-        description: "Performed FEA (Finite Element Analysis) on main linkages. Used simulation data to remove material from non-load-bearing areas to save weight.",
-        photos: [{ src: "/images/cprt-fea-analysis.jpg", caption: "Stress/Strain FEA Simulation" }]
+        icon: "⚖️",
+        step: "04. Critical Design Review",
+        description: "Compiled testing data, engineering calculations, and manufacturing plans to defend design choices during formal faculty and team lead reviews. Adjusted tolerances and packaging based on expert feedback.",
+        photos: [{ src: "/images/cprt-presentation.jpg", caption: "CDR presentation" }, { src: "/images/cprt-feedback.jpg", caption: "Review notes" }]
+      },
+      {
+        icon: "🏭",
+        step: "05. Finalization & Machining",
+        description: "Iterated on the final design geometry based on CDR feedback. Prepared technical drawings and CAM toolpaths to transition the arm components into the physical manufacturing phase.",
+        photos: [{ src: "/images/cprt-drawings.jpg", caption: "Technical drawings" }, { src: "/images/cprt-cam.jpg", caption: "Machining prep" }]
+      },
+      {
+        icon: "🦾",
+        step: "06. Final Assembly & Integration",
+        description: "Successfully manufactured, assembled, and integrated the physical 4-DOF arm onto the rover chassis. Validated mechanical movements, verified backlash reduction, and delivered a competition-ready subsystem.",
+        photos: [{ src: "/images/cprt-final-arm.jpg", caption: "Completed Arm" }, { src: "/images/cprt-mounted.jpg", caption: "Chassis Integration" }]
       }
     ]
   },
 
   frc2025: {
     title: "FRC 2025: Team Manager",
-    status: "Completed",
-    role: "Team Manager & Lead Coordinator",
-    overview: "Directed team logistics and administrative workflows for Team 9659, implementing professional PDM systems to streamline engineering.",
-    images: ["/images/frc-2025-leadership.jpg"],
+    role: "Team Manager & Mechanical Lead",
+    status: "COMPLETED",
+    overview: "Led the engineering and integration processes for Team 9659. Built upon the previous year's lessons to optimize team structure, improve design confidence, and deliver a highly competitive, maintainable robot.",
+    label: "2025 Season",
+    images: [
+      "/images/frc25-hero.jpg",
+      "/images/frc25-cad.jpg",
+      "/images/frc25-action.jpg"
+    ],
     workflow: [
       {
-        step: "1. Problem Definition",
-        icon: "⚖️",
-        description: "Identified a bottleneck in productivity due to unorganized version control and poor resource management.",
-        photos: [{ src: "/images/frc-logistics-map.jpg", caption: "Shop Floor Optimization Plan" }]
+        icon: "🎯",
+        step: "01. Strategic Optimization",
+        description: "Utilized lessons from 2024 to dramatically improve the planning phase. Divided work streams efficiently between mechanical, electrical, and programming sub-teams to streamline the build season timeline.",
+        photos: [{ src: "/images/frc25-gantt.jpg", caption: "Season timeline" }, { src: "/images/frc25-meeting.jpg", caption: "Sub-team coordination" }]
       },
       {
-        step: "2. Specify Requirements",
-        icon: "📝",
-        description: "Required a cloud-based CAD management solution and improved shop accessibility for student members.",
-        photos: [{ src: "/images/kenesto-setup.jpg", caption: "Kenesto PDM Implementation" }]
+        icon: "📐",
+        step: "02. Evaluative Engineering",
+        description: "Evaluated proposed mechanisms against scoring value, manufacturing complexity, and driver usability. Locked in design choices earlier in the season with higher confidence, focusing on tasks that could be executed consistently.",
+        photos: [{ src: "/images/frc25-design-matrix.jpg", caption: "Decision matrix" }, { src: "/images/frc25-cad-final.jpg", caption: "Finalized CAD" }]
       },
       {
-        step: "3. Brainstorm & Prototype",
-        icon: "📅",
-        description: "Managed the build season schedule using Agile-lite methodology and oversaw the procurement of raw materials.",
-        photos: [{ src: "/images/frc-build-schedule.jpg", caption: "Build Season Gantt Chart" }]
+        icon: "🧩",
+        step: "03. Managed Integration",
+        description: "Oversaw the physical construction, guiding junior members through assembly and wiring. Ensured strict adherence to repairability standards, making sure subsystems could be easily serviced during tight competition turnarounds.",
+        photos: [{ src: "/images/frc25-build.jpg", caption: "Chassis assembly" }, { src: "/images/frc25-mentoring.jpg", caption: "Guiding junior members" }]
       },
       {
-        step: "4. Communicate Results",
-        icon: "🏆",
-        description: "Led the team through competition cycles with improved organization, faster pit turnaround, and more reliable documentation.",
-        photos: [{ src: "/images/frc-2025-competition.jpg", caption: "Team 9659 at Regional Event" }]
+        icon: "📊",
+        step: "04. Iterative Performance Tuning",
+        description: "Enforced an early-testing mandate. Analyzed physical performance data during drive tests to identify weaknesses, allowing the team to iterate on manipulators and control code well before the first official match.",
+        photos: [{ src: "/images/frc25-tuning.jpg", caption: "Mechanism tuning" }, { src: "/images/frc25-code.jpg", caption: "Control calibration" }]
+      },
+      {
+        icon: "🚀",
+        step: "05. Delivery & Leadership",
+        description: "Successfully fielded a highly reliable robot. Proven growth in engineering management, demonstrating how structured decision-making, early testing, and strong team communication directly yield a more competitive machine.",
+        photos: [{ src: "/images/frc25-competing.jpg", caption: "Match execution" }, { src: "/images/frc25-group.jpg", caption: "2025 Roster" }]
       }
     ]
   },
 
   frc2024: {
     title: "FRC 2024: Mechanical",
-    status: "Completed",
-    role: "Mechanical Fabrication Member",
-    overview: "Hands-on manufacturing and assembly of a high-performance competition robot for Team 9659.",
-    images: ["/images/frc-2024-build.jpg"],
+    role: "Mechanical Contributor",
+    status: "COMPLETED",
+    overview: "Designed, manufactured, and integrated mechanical systems for the Vanier Vikings' 2024 FIRST Robotics Competition robot. Focused on rapid prototyping, reliable fabrication under strict timelines, and establishing a strong structural foundation.",
+    label: "2024 Season",
+    images: [
+      "/images/frc24-chassis.jpg",
+      "/images/frc24-competition.jpg",
+      "/images/frc24-assembly.jpg"
+    ],
     workflow: [
       {
-        step: "1. Research & Research",
+        icon: "📋",
+        step: "01. Game Analysis & Requirements",
+        description: "Analyzed the 2024 FRC game manual to define strict limits on budget, weight, and dimensions. Prioritized a strategy that balanced essential scoring tasks with the team's available tools and manufacturing experience to ensure match durability.",
+        photos: [{ src: "/images/frc24-planning.jpg", caption: "Initial strategy breakdown" }, { src: "/images/frc24-whiteboard.jpg", caption: "Mechanism requirements" }]
+      },
+      {
         icon: "⚙️",
-        description: "Studied drivetrain designs to determine the best chassis configuration for traction versus maneuverability in the game challenge.",
-        photos: [{ src: "/images/frc-drivetrain-study.jpg", caption: "Drivetrain Comparison Study" }]
+        step: "02. Conceptual Design & Triage",
+        description: "Researched standard robot mechanisms and drivetrain options to identify reliable solutions realistic for the team's capabilities. Prioritized simplicity, manufacturing efficiency, and ease of repair over complexity to maximize competition uptime.",
+        photos: [{ src: "/images/frc24-sketches.jpg", caption: "Mechanism brainstorming" }, { src: "/images/frc24-cad-draft.jpg", caption: "Early CAD layout" }]
       },
       {
-        step: "2. Develop & Prototype",
-        icon: "🔨",
-        description: "Utilized CNC milling, lathes, and precise manual machining to create custom gussets, motor mounts, and drive axles.",
-        photos: [
-          { src: "/images/frc-cnc-work.jpg", caption: "CNC Milling of Chassis" },
-          { src: "/images/frc-manual-machining.jpg", caption: "Lathe work for axles" }
-        ]
+        icon: "🛠️",
+        step: "03. Fabrication & Prototyping",
+        description: "Moved from concept to physical development, assisting in the manufacturing and assembly of robot components. Iterated on early prototypes that failed under stress, adjusting the build based on realistic hardware performance.",
+        photos: [{ src: "/images/frc24-manufacturing.jpg", caption: "Machining parts" }, { src: "/images/frc24-wiring.jpg", caption: "Electrical integration" }]
       },
       {
-        step: "3. Test Solution",
-        icon: "🕹️",
-        description: "Conducted driver practice to find mechanical weak points. Iterated on the chain tensioning system to prevent slippage.",
-        photos: [{ src: "/images/frc-driver-practice.jpg", caption: "Full Speed Field Testing" }]
+        icon: "🏎️",
+        step: "04. Testing & Stress Validation",
+        description: "Conducted rigorous driving and mechanism tests to identify points of failure before competition. Diagnosed and resolved mechanical looseness, alignment issues, and wiring vulnerabilities during full-system load testing.",
+        photos: [{ src: "/images/frc24-testing.jpg", caption: "Drive practice" }, { src: "/images/frc24-repairs.jpg", caption: "Pit repairs" }]
+      },
+      {
+        icon: "🏁",
+        step: "05. Competition & Reflection",
+        description: "Represented the team at competition, performing rapid repairs in the pit between matches. Learned that simple, reliable, and easily maintainable designs heavily outperform complex systems that are difficult to repair under pressure.",
+        photos: [{ src: "/images/frc24-match.jpg", caption: "Robot on the field" }, { src: "/images/frc24-team.jpg", caption: "Team 9659" }]
+      }
+    ]
+  },
+
+  vex2024: {
+    title: "VEX Robotics",
+    role: "Programmer & Mechanical Builder",
+    status: "COMPLETED",
+    award: "Design Award Winner | Worlds Qualifier",
+    label: "2024 Season",
+    overview: "Designed and programmed a high-performance competition robot for the 2024 VEX season. Achieved the Design Award at Ontario Provincials and qualified for the VEX World Championships by maintaining a rigorous engineering notebook.",
+    images: [
+      "/images/vex-worlds.jpg",
+      "/images/vex-robot-hero.jpg",
+      "/images/vex-award.jpg"
+    ],
+    workflow: [
+      {
+        icon: "🏆",
+        step: "01. Design Requirements & Documentation",
+        description: "Defined game-specific requirements with a focus on judge-criteria excellence. Established a rigorous engineering notebook protocol to document design iterations, scoring strategies, and rule compliance from day one.",
+        photos: [{ src: "/images/vex-notebook.jpg", caption: "Award-winning engineering notebook" }, { src: "/images/vex-strategy.jpg", caption: "Scoring priority analysis" }]
+      },
+      {
+        icon: "💻",
+        step: "02. C++/PROS Software Architecture",
+        description: "Developed responsive driver control logic and high-precision autonomous routines using C++ and the PROS kernel. Focused on sensor-fusion and PID tuning to ensure repeatable robot movement during the autonomous period.",
+        photos: [{ src: "/images/vex-code-pid.jpg", caption: "PID control loop logic" }, { src: "/images/vex-sensor-setup.jpg", caption: "Inertial/Optical sensor integration" }]
+      },
+      {
+        icon: "🔧",
+        step: "03. Mechanical Fabrication & Hybridization",
+        description: "Integrated mechanical linkages with software requirements. Focused on reducing friction in high-speed drivetrains and optimizing intake geometry to ensure consistent game-object handling under competition stress.",
+        photos: [{ src: "/images/vex-build-chassis.jpg", caption: "Drivetrain assembly" }, { src: "/images/vex-intake-v1.jpg", caption: "Intake prototype" }]
+      },
+      {
+        icon: "🧪",
+        step: "04. Validation & Precision Tuning",
+        description: "Executed match simulations to identify hardware fatigue. Tuned autonomous code to account for battery voltage fluctuations and field friction, ensuring 100% repeatability for world-class competition standards.",
+        photos: [{ src: "/images/vex-practice.jpg", caption: "Match simulation" }, { src: "/images/vex-debug.jpg", caption: "Field calibration" }]
+      },
+      {
+        icon: "🌎",
+        step: "05. Provincials & World Championship",
+        description: "Successfully competed at the Provincial and World Championship levels. Received the Design Award for excellence in the engineering process, proving the value of data-driven design and systematic iteration.",
+        photos: [{ src: "/images/vex-worlds-booth.jpg", caption: "VEX Worlds 2024" }, { src: "/images/vex-team-photo.jpg", caption: "Ontario Provincials" }]
       }
     ]
   }
@@ -274,8 +365,8 @@ function HomeView({ onNavigate }) {
             </div>
 
             <div className="space-y-3 mb-8">
-              <div className="flex items-center gap-3 text-sm"><span className="text-emerald-400">✓</span> <span className="text-slate-500 line-through">Mechanical CAD Design</span></div>
               <div className="flex items-center gap-3 text-sm"><span className="text-emerald-400">✓</span> <span className="text-slate-500 line-through">Basic Motor Control</span></div>
+              <div className="flex items-center gap-3 text-sm font-semibold text-[#F59E0B]"><span className="animate-spin">⟳</span> <span>Mechanical CAD Design</span></div>
               <div className="flex items-center gap-3 text-sm font-semibold text-[#F59E0B]"><span className="animate-spin">⟳</span> <span>Vision Integration (OpenCV)</span></div>
             </div>
 
@@ -294,51 +385,68 @@ function HomeView({ onNavigate }) {
         <div className="font-mono text-xs tracking-widest text-[#60A5FA] mb-2">// EXPERIENCE & PROJECTS</div>
         <h2 className="text-3xl font-bold text-slate-100 mb-8">Engineering Portfolio</h2>
         
-        <div className="grid md:grid-cols-2 gap-6">
-          {/* 1. OPENCV PROJECT */}
-          <div className="bg-[#161B27] border border-[#1E2940] rounded-lg p-6 hover:border-[#60A5FA]/50 transition-colors">
-            <div className="flex justify-between items-start mb-4">
-              <div className="font-mono text-[10px] text-slate-500 tracking-wider uppercase">Mechatronics</div>
-              <span className="bg-[#F59E0B]/10 text-[#F59E0B] font-mono text-[9px] px-2 py-1 rounded border border-[#F59E0B]/20">ACTIVE WIP</span>
-            </div>
-            <h3 className="text-lg font-bold text-slate-100 mb-2">Computer Vision Robotic Arm</h3>
-            <p className="text-sm text-slate-400 mb-6">4-DOF sorting system integrating Raspberry Pi, ESP32, and OpenCV.</p>
-            <button onClick={() => onNavigate('opencv')} className="text-[#60A5FA] font-mono text-xs hover:underline">View Workflow →</button>
-          </div>
+        {/* ========================================= */}
+        {/* UNIVERSAL PROJECT GRID                    */}
+        {/* ========================================= */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {Object.entries(projectData).map(([projectId, project]) => (
+            <div 
+              key={projectId}
+              className="bg-[#161B27] border border-[#1E2940] rounded-2xl overflow-hidden hover:border-[#60A5FA]/50 transition-all group flex flex-col hover:-translate-y-1 duration-300 shadow-xl"
+            >
+              
+              {/* Wide Banner Image Area */}
+              <div className="h-56 w-full bg-[#0F1117] relative overflow-hidden border-b border-[#1E2940] flex items-center justify-center">
+                <img 
+                  src={project.images[0] === "TERMINAL" ? "/jm-logo.png" : (project.images[0] || "/jm-logo.png")} 
+                  alt={project.title}
+                  // object-cover ensures it stretches edge-to-edge like a true banner!
+                  className={`w-full h-full transition-all duration-500 opacity-60 group-hover:opacity-100 group-hover:scale-105 ${project.images[0] === "TERMINAL" ? "object-contain p-8" : "object-cover"}`}
+                  onError={(e) => { e.target.onerror = null; e.target.src = '/jm-logo.png'; e.target.className="w-full h-full object-contain p-8 opacity-60"; }}
+                />
+                
+                {project.award && (
+                  <div className="absolute top-4 left-4 bg-[#F59E0B]/10 border border-[#F59E0B]/50 text-[#F59E0B] text-[10px] font-mono px-3 py-1 rounded-full backdrop-blur-md shadow-lg flex items-center gap-2 z-10">
+                    <span>🏆</span> {project.award}
+                  </div>
+                )}
+              </div>
 
-          {/* 2. CPRT PROJECT */}
-          <div className="bg-[#161B27] border border-[#1E2940] rounded-lg p-6 hover:border-[#60A5FA]/50 transition-colors">
-            <div className="flex justify-between items-start mb-4">
-              <div className="font-mono text-[10px] text-slate-500 tracking-wider uppercase">Carleton Robotics</div>
-              <span className="bg-[#60A5FA]/10 text-[#60A5FA] font-mono text-[9px] px-2 py-1 rounded border border-[#60A5FA]/20">ONGOING</span>
-            </div>
-            <h3 className="text-lg font-bold text-slate-100 mb-2">CPRT Rover Arm</h3>
-            <p className="text-sm text-slate-400 mb-6">Mechanical design and FEA for international rover competitions.</p>
-            <button onClick={() => onNavigate('cprt')} className="text-[#60A5FA] font-mono text-xs hover:underline">View Workflow →</button>
-          </div>
+              {/* Card Content */}
+              <div className="p-6 flex flex-col flex-grow">
+                <div className="flex justify-between items-center mb-4">
+                  <span className={`text-[10px] font-mono uppercase tracking-widest border px-2 py-0.5 rounded ${
+                    project.status === 'COMPLETED' ? 'text-emerald-400 border-emerald-400/30' : 
+                    project.status.includes('WIP') ? 'text-[#F59E0B] border-[#F59E0B]/30' : 
+                    'text-[#60A5FA] border-[#60A5FA]/30'
+                  }`}>
+                    {project.status}
+                  </span>
+                  
+                  {/* This replaces the old complex if-statement */}
+                  <span className="text-[10px] font-mono text-slate-500">
+                    {project.label}
+                  </span>
+                </div>
 
-          {/* 3. FRC 2025 (MANAGEMENT) */}
-          <div className="bg-[#161B27] border border-[#1E2940] rounded-lg p-6 hover:border-[#60A5FA]/50 transition-colors">
-            <div className="flex justify-between items-start mb-4">
-              <div className="font-mono text-[10px] text-slate-500 tracking-wider uppercase">FIRST Robotics</div>
-              <span className="bg-emerald-400/10 text-emerald-400 font-mono text-[9px] px-2 py-1 rounded border border-emerald-400/20">COMPLETED</span>
-            </div>
-            <h3 className="text-lg font-bold text-slate-100 mb-2">FRC 2025: Team Manager</h3>
-            <p className="text-sm text-slate-400 mb-6">Logistics, PDM implementation, and team coordination for Team 9659.</p>
-            <button onClick={() => onNavigate('frc2025')} className="text-[#60A5FA] font-mono text-xs hover:underline">View Workflow →</button>
-          </div>
+                <h3 className="text-2xl font-bold text-white mb-1">{project.title}</h3>
+                <p className="text-xs text-[#F59E0B] font-mono mb-4">{project.role}</p>
 
-          {/* 4. FRC 2024 (MECHANICAL) */}
-          <div className="bg-[#161B27] border border-[#1E2940] rounded-lg p-6 hover:border-[#60A5FA]/50 transition-colors">
-            <div className="flex justify-between items-start mb-4">
-              <div className="font-mono text-[10px] text-slate-500 tracking-wider uppercase">FIRST Robotics</div>
-              <span className="bg-emerald-400/10 text-emerald-400 font-mono text-[9px] px-2 py-1 rounded border border-emerald-400/20">COMPLETED</span>
+                <p className="text-slate-400 text-sm leading-relaxed mb-8 flex-grow line-clamp-3">
+                  {project.overview}
+                </p>
+
+                <button 
+                  onClick={() => onNavigate(projectId)} 
+                  className="w-full border border-[#1E2940] text-slate-300 py-3 rounded-lg font-mono text-xs hover:bg-[#60A5FA] hover:text-[#0F1117] hover:border-[#60A5FA] transition-all font-bold tracking-wide mt-auto"
+                >
+                  View Engineering Process →
+                </button>
+              </div>
             </div>
-            <h3 className="text-lg font-bold text-slate-100 mb-2">FRC 2024: Mechanical</h3>
-            <p className="text-sm text-slate-400 mb-6">Hands-on fabrication and assembly of a high-performance competition bot.</p>
-            <button onClick={() => onNavigate('frc2024')} className="text-[#60A5FA] font-mono text-xs hover:underline">View Workflow →</button>
-          </div>
+          ))}
         </div>
+        
       </section>
     </div>
   );
@@ -348,11 +456,32 @@ function HomeView({ onNavigate }) {
 {/* UNIVERSAL CINEMATIC PROJECT VIEW          */}
 {/* ========================================= */}
 function ProjectView({ project, onBack }) {
-  useEffect(() => {
+  useLayoutEffect(() => {
     window.scrollTo(0, 0);
-  }, [project]); // This runs every time the 'project' data changes
+  }, [project]);
   // 1. Initialize state at the very top (Rules of Hooks)
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  
+  // AUTOPLAY LOGIC: Switches images every 5 seconds
+  useEffect(() => {
+    // Only start the timer if there's more than one image
+    if (project.images.length <= 1) return;
+
+    const timer = setInterval(() => {
+      handleNext();
+    }, 5000); // 5000ms = 5 seconds
+
+    // CLEANUP: This stops the timer if the user leaves the page
+    return () => clearInterval(timer);
+  }, [currentImageIndex, project.images.length]);
+
+  const handlePrev = () => {
+    setCurrentImageIndex((prev) => (prev === 0 ? project.images.length - 1 : prev - 1));
+  };
+
+  const handleNext = () => {
+    setCurrentImageIndex((prev) => (prev === project.images.length - 1 ? 0 : prev + 1));
+  };
 
   // 2. Safety Check: If the data hasn't arrived, show a loading state
   if (!project || !project.workflow) {
@@ -367,10 +496,7 @@ function ProjectView({ project, onBack }) {
     );
   }
 
-  // 3. Select the Hero Image (defaults to first image in the list)
-  const heroImage = project.images && project.images.length > 0 
-    ? project.images[0] 
-    : '/images/JM-placeholder.jpg';
+  
 
   return (
     <div className="animate-in fade-in slide-in-from-bottom-4 duration-1000 selection:bg-[#60A5FA] selection:text-[#0F1117]">
@@ -387,12 +513,6 @@ function ProjectView({ project, onBack }) {
 
       {/* 1. TUNED CINEMATIC HERO SECTION */}
       <header className="relative w-full h-[50vh] md:h-[65vh] overflow-hidden border-b border-[#1E2940] group flex items-center">
-         <img 
-            src={heroImage} 
-            alt={project.title} 
-            className="absolute inset-0 w-full h-full object-cover transition-transform duration-[5s] group-hover:scale-105"
-            onError={(e) => { e.target.src = '/images/JM-placeholder.jpg'; }}
-          />
 
           {/* Stronger Overlay for better contrast */}
           <div className="absolute inset-0 bg-[#0F1117]/50 group-hover:bg-[#0F1117]/30 transition-colors duration-500"></div>
@@ -419,6 +539,29 @@ function ProjectView({ project, onBack }) {
             </div>
           </div>
       </header>
+
+      <div className="relative w-full aspect-video md:h-[500px] bg-[#161B27] rounded-2xl overflow-hidden border border-[#1E2940] group mb-24 shadow-2xl">
+          <img 
+            src={project.images[currentImageIndex]} 
+            className="w-full h-full object-cover"
+            onError={(e) => { 
+              e.target.onerror = null; 
+              e.target.src = '/jm-logo.png'; 
+            }}
+          />
+          {project.images.length > 1 && (
+            <>
+              <button onClick={handlePrev} className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-[#0F1117]/80 text-white z-20 opacity-0 group-hover:opacity-100 transition-opacity">←</button>
+              <button onClick={handleNext} className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-[#0F1117]/80 text-white z-20 opacity-0 group-hover:opacity-100 transition-opacity">→</button>
+              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+                {project.images.map((_, idx) => (
+                  <button key={idx} onClick={() => setCurrentImageIndex(idx)} className={`h-1.5 rounded-full transition-all ${currentImageIndex === idx ? 'bg-[#60A5FA] w-6' : 'bg-slate-600 w-1.5'}`} />
+                ))}
+              </div>
+            </>
+          )}
+      </div>
+
 
       {/* 2. TECHNICAL WORKFLOW (The "Engine Room") */}
       <section className="max-w-6xl mx-auto px-6 py-32">
@@ -529,20 +672,20 @@ function ContactView({ onBack }) {
         {/* EMAIL CARD */}
         {/* EDIT: Swap the mailto: address with your real email */}
         <a 
-          href="mailto:jayden.mendoza@example.com" 
+          href="mailto:jaydenmendoza@cmail.carleton.ca" 
           className="bg-[#161B27] border border-[#1E2940] hover:border-[#60A5FA]/50 rounded-lg p-8 flex flex-col items-center justify-center text-center transition-all group"
         >
           <div className="w-12 h-12 rounded-full bg-[#60A5FA]/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
             <span className="text-xl text-[#60A5FA]">✉</span>
           </div>
           <h3 className="text-lg font-bold text-slate-100 mb-1">Email Me</h3>
-          <p className="font-mono text-xs text-slate-400">jayden.mendoza@example.com</p>
+          <p className="font-mono text-xs text-slate-400">jaydenmendoza@cmail.carleton.ca</p>
         </a>
 
         {/* LINKEDIN CARD */}
         {/* EDIT: Swap the href link with your real LinkedIn profile URL */}
         <a 
-          href="https://linkedin.com/in/your-profile" 
+          href="https://www.linkedin.com/in/jayden-mendoza/" 
           target="_blank" 
           rel="noopener noreferrer"
           className="bg-[#161B27] border border-[#1E2940] hover:border-[#60A5FA]/50 rounded-lg p-8 flex flex-col items-center justify-center text-center transition-all group"
