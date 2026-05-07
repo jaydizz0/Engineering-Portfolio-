@@ -204,7 +204,7 @@ const projectData = {
     label: "2024 Season",
     overview: "Designed and programmed a high-performance competition robot for the 2024 VEX season. Achieved the Design Award at Ontario Provincials and qualified for the VEX World Championships by maintaining a rigorous engineering notebook.",
     images: [
-      "/images/vex-worlds.jpg",
+      "/images/VexProjectBanner.jpeg",
       "/images/vex-robot-hero.jpg",
       "/images/vex-award.jpg"
     ],
@@ -396,17 +396,25 @@ function HomeView({ onNavigate }) {
             >
               
               {/* Wide Banner Image Area */}
-              <div className="h-56 w-full bg-[#0F1117] relative overflow-hidden border-b border-[#1E2940] flex items-center justify-center">
+              {/* Wide Banner Image Area - FORCED FILL */}
+              <div className="h-56 w-full bg-[#0F1117] relative overflow-hidden border-b border-[#1E2940]">
                 <img 
                   src={project.images[0] === "TERMINAL" ? "/jm-logo.png" : (project.images[0] || "/jm-logo.png")} 
                   alt={project.title}
-                  // object-cover ensures it stretches edge-to-edge like a true banner!
-                  className={`w-full h-full transition-all duration-500 opacity-60 group-hover:opacity-100 group-hover:scale-105 ${project.images[0] === "TERMINAL" ? "object-contain p-8" : "object-cover"}`}
-                  onError={(e) => { e.target.onerror = null; e.target.src = '/jm-logo.png'; e.target.className="w-full h-full object-contain p-8 opacity-60"; }}
+                  // We added 'absolute inset-0' and removed the 'flex' centering from the parent div
+                  className={`absolute inset-0 w-full h-full transition-all duration-500 opacity-60 group-hover:opacity-100 group-hover:scale-105 ${
+                    project.images[0] === "TERMINAL" ? "object-contain p-8" : "object-cover"
+                  }`}
+                  onError={(e) => { 
+                    e.target.onerror = null; 
+                    e.target.src = '/jm-logo.png'; 
+                    e.target.className="absolute inset-0 w-full h-full object-contain p-12 opacity-40"; 
+                  }}
                 />
                 
+                {/* Gold Award Badge (Pinned correctly over the banner) */}
                 {project.award && (
-                  <div className="absolute top-4 left-4 bg-[#F59E0B]/10 border border-[#F59E0B]/50 text-[#F59E0B] text-[10px] font-mono px-3 py-1 rounded-full backdrop-blur-md shadow-lg flex items-center gap-2 z-10">
+                  <div className="absolute top-4 left-4 bg-[#F59E0B]/20 border border-[#F59E0B]/50 text-[#F59E0B] text-[10px] font-mono px-3 py-1 rounded-full backdrop-blur-md shadow-lg flex items-center gap-2 z-10">
                     <span>🏆</span> {project.award}
                   </div>
                 )}
@@ -432,7 +440,7 @@ function HomeView({ onNavigate }) {
                 <h3 className="text-2xl font-bold text-white mb-1">{project.title}</h3>
                 <p className="text-xs text-[#F59E0B] font-mono mb-4">{project.role}</p>
 
-                <p className="text-slate-400 text-sm leading-relaxed mb-8 flex-grow line-clamp-3">
+                <p className="text-slate-400 text-sm leading-relaxed mb-8 flex-grow line-clamp-5">
                   {project.overview}
                 </p>
 
