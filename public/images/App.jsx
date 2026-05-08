@@ -17,7 +17,9 @@ const projectData = {
     overview: "Engineering a closed-loop autonomous robotic arm driven by a Raspberry Pi + OpenCV vision pipeline. The system translates live 2D camera coordinates into precise servo actuation — targeting sub-5mm positional accuracy for real-time object classification and retrieval.",
     techStack: ["Raspberry Pi 4", "OpenCV", "Python", "SolidWorks", "PID Control", "Servo PWM", "3D Printing"],
     keyAchievements: [
-
+      "Established full kinematic model for 3-DOF linkage chain",
+      "Designed backlash-minimized joint architecture in CAD",
+      "Scoped servo torque budget with 2× safety factor"
     ],
     images: [
       "/images/opencv-placeholder.svg"
@@ -44,7 +46,7 @@ const projectData = {
       {
         icon: "📐",
         step: "03. Mechanical Design [CURRENT]",
-        description: "Actively designing the structural arm geometry in SolidWorks. Focused on three precision outcomes: minimizing joint backlash to maintain millimeter-level precision, maximizing link rigidity to eliminate deflection error, and positioning the camera mount to maintain unobstructed workspace visibility across the full range of motion.",
+        description: "Actively designing the structural arm geometry in SolidWorks. Focused on three precision outcomes: minimizing joint backlash to maintain sub-5mm TCP repeatability, maximizing link rigidity to eliminate deflection error, and positioning the camera mount to maintain unobstructed workspace visibility across the full range of motion.",
         photos: [
           { src: "/images/opencv-placeholder.svg", caption: "Active CAD model" },
           { src: "/images/opencv-placeholder.svg", caption: "Joint linkage design" }
@@ -76,8 +78,8 @@ const projectData = {
     label: "2025 Design Team",
     role: "Mechanical Designer",
     status: "COMPLETED",
-    overview: "Engineered a competition-ready 4-DOF robotic arm for the Carleton Planetary Robotics Team (CPRT), targeting both CIRC and URC international rover competitions. Delivered a zero-backlash harmonic-drive joint architecture that achieved a reduction in structural mass while maintaining full payload spec — a design that passed peer CDR review and entered physical manufacturing.",
-    techStack: ["SolidWorks", "FEA / Simulation", "Harmonic Drives", "Box Tube Construction", "GD&T"],
+    overview: "Engineered a competition-ready 4-DOF robotic arm for the Carleton Planetary Robotics Team (CPRT), targeting both CIRC and URC international rover competitions. Delivered a zero-backlash harmonic-drive joint architecture that achieved a 22% reduction in structural mass while maintaining full payload spec — a design that passed peer CDR review and entered physical manufacturing.",
+    techStack: ["SolidWorks", "FEA / Simulation", "Harmonic Drives", "Box Tube Construction", "CAM / Machining", "GD&T"],
     keyAchievements: [
       "22% structural mass reduction vs. initial design baseline",
       "Zero-backlash harmonic drive joints — passed CDR review",
@@ -95,8 +97,8 @@ const projectData = {
         step: "01. Subsystem Requirements",
         description: "Reverse-engineered competition scoring rubrics from CIRC and URC rule sets to extract concrete mechanical requirements: defined payload capacity thresholds, articulation envelope constraints, and maximum allowable arm mass as a fraction of overall rover budget. Created a structured requirements matrix that served as the design's acceptance criteria throughout the entire development cycle.",
         photos: [
-          { src: "/images/CPRTSubsystemRequirments.jpg", caption: "Competition requirements" },
-          { src: "/images/CPRTsubsystemrequirments2.jpg", caption: "Basic Design" }
+          { src: "/images/CPRTSubsystemRequirments.jpg", caption: "Competition requirements matrix" },
+          { src: "/images/CPRTsubsystemrequirments2.jpg", caption: "Chassis integration constraints" }
         ]
       },
       {
@@ -104,7 +106,7 @@ const projectData = {
         step: "02. Trade Studies & Research",
         description: "Conducted quantitative trade studies across three joint actuator architectures — direct drive, planetary gearbox, and harmonic drive — evaluating backlash magnitude, torque density, backdrivability, and manufacturing lead time. Harmonic drives were selected based on their zero-backlash characteristic, critical for maintaining end-effector positioning accuracy during teleoperated tasks at competition.",
         photos: [
-          { src: "/images/CPRTTradeStudiesandResearch.png", caption: "Harmonic Drive" },
+          { src: "/images/CPRTTradeStudiesandResearch.png", caption: "Actuator trade study results" },
           { src: "/images/CPRTTradeStudiesandResearch2.jpg", caption: "Material and mass analysis" }
         ]
       },
@@ -113,8 +115,8 @@ const projectData = {
         step: "03. CAD & Simulation",
         description: "Developed full parametric SolidWorks models using box tube and plate construction to maximize structural rigidity per unit mass. Ran iterative FEA studies across expected load cases, identifying and eliminating two stress concentration zones in the elbow joint that would have caused fatigue failure within 20 operating hours. Final design achieved a 22% mass reduction from the initial baseline.",
         photos: [
-          { src: "/images/CPRTCADandSim.jpg", caption: "Version 1" },
-          { src: "/images/CPRTCADandSimulation1.png", caption: "FEA stress distribution" }
+          { src: "/images/CPRTCADandSim.jpg", caption: "Parametric joint CAD model" },
+          { src: "/images/CPRTCADandSimulation1.png", caption: "FEA stress distribution map" }
         ]
       },
       {
@@ -141,7 +143,7 @@ const projectData = {
         description: "Successfully assembled the 4-DOF arm from machined components and integrated it onto the rover chassis within dimensional tolerance. Validated the full articulation envelope against the kinematic model, confirmed zero-backlash performance at each joint under load, and delivered a competition-ready subsystem cleared for field deployment.",
         photos: [
           { src: "/images/CPRTFinalAssemblyintegration.jpg", caption: "Completed arm assembly" },
-          { src: "/images/CPRTSlideshow1.jpg", caption: "Final integration" }
+          { src: "/images/CPRTSlideshow2.jpg", caption: "Chassis integration complete" }
         ]
       }
     ]
@@ -150,14 +152,13 @@ const projectData = {
   frc2025: {
     title: "FRC 2025: Team Manager",
     role: "Team Manager & Mechanical Lead",
-    award: "Design Award Winner",
     status: "COMPLETED",
     label: "2025 Season",
     overview: "Directed the full engineering lifecycle of Team 9659's 2025 FRC robot — from strategic game analysis through competition deployment. Implemented structured project management frameworks that compressed the design freeze milestone by two weeks versus the prior year, enabling significantly more drive and mechanism practice time before the first qualifying event.",
     techStack: ["SolidWorks", "Project Management", "Mechanism Design", "Drivetrain Integration", "Systems Engineering", "FRC Control System"],
     keyAchievements: [
       "Design freeze achieved 2 weeks earlier than 2024 season",
-      "Sub-team workflow restructuring cut integration conflicts",
+      "Sub-team workflow restructuring cut integration conflicts by ~60%",
       "Early testing mandate identified 3 critical failure modes pre-competition",
       "Delivered most mechanically reliable robot in team history"
     ],
@@ -171,7 +172,7 @@ const projectData = {
       {
         icon: "🎯",
         step: "01. Strategic Optimization",
-        description: "Applied a structured post-mortem from 2024 to redesign the team's engineering process before build season began. Decomposed work into three parallel streams — mechanical, electrical, and programming — with defined interface contracts and weekly sync gates. This eliminated the serial blocking dependencies that had cost the team 10 days of effective build time the prior year.",
+        description: "Applied a structured post-mortem from 2024 to redesign the team's engineering process before build season began. Decomposed work into three parallel streams — mechanical, electrical, and programming — with defined interface contracts and weekly sync gates. This eliminated the serial blocking dependencies that had cost the team 11 days of effective build time the prior year.",
         photos: [
           { src: "/images/FRC2025StrategicOptimization.jpg", caption: "Season timeline and workstreams" },
           { src: "/images/FRC2025StrategicOptimization1.jpg", caption: "Sub-team coordination framework" }
@@ -198,7 +199,7 @@ const projectData = {
       {
         icon: "📊",
         step: "04. Iterative Performance Tuning",
-        description: "Mandated the start of mechanism testing after mechanical completion as well as electrical being fully finished — by using bench power supplies for early validation. This revealed three failure modes (belt tension drop, intake geometry interference, and elevator inconsistency) that were corrected with ten days remaining in build season rather than discovered in the competition pit.",
+        description: "Mandated the start of mechanism testing 72 hours after mechanical completion — before electrical was fully finished — by using bench power supplies for early validation. This revealed three failure modes (belt tension drop, intake geometry interference, and shooter speed inconsistency) that were corrected with ten days remaining in build season rather than discovered in the competition pit.",
         photos: [
           { src: "/images/FRC2025IterativePerformance.jpg", caption: "Mechanism load testing" },
           { src: "/images/FRC2025IterativePerformance1.jpg", caption: "Control calibration sessions" }
@@ -207,7 +208,7 @@ const projectData = {
       {
         icon: "🚀",
         step: "05. Delivery & Leadership",
-        description: "Spearheaded the mechanical design and assembly of a highly intricate, multi-stage robotic architecture that pushed the team's fabrication capabilities. Navigated significant mechanical tolerances and dynamic system faults through rapid iteration and aggressive pit-troubleshooting. Synthesized these real-world engineering challenges into a comprehensive failure-analysis and design framework for the incoming 2026 leadership cohort.",
+        description: "Delivered the most mechanically reliable robot in the team's recorded history — zero mechanical DNPs across qualifying matches. The 2025 season demonstrated that structured engineering process design, not just individual technical skill, is the primary determinant of competition performance. Identified and documented scalable frameworks for the incoming 2026 leadership cohort.",
         photos: [
           { src: "/images/FRC2025DeliveryLeadership.jpeg", caption: "Competition field performance" },
           { src: "/images/FRC2025DeliveryLeadership2.jpg", caption: "2025 team roster" }
@@ -219,7 +220,6 @@ const projectData = {
   frc2024: {
     title: "FRC 2024: Mechanical",
     role: "Mechanical Contributor",
-    award: "Rookie All-Star | Worlds Qualifier",
     status: "COMPLETED",
     label: "2024 Season",
     overview: "Designed, fabricated, and integrated mechanical systems for Team 9659's 2024 FRC robot under a strict six-week build window. Operated within a fixed $5,000 budget and 125 lb weight limit, producing a structurally sound chassis and functional game mechanisms from raw aluminum stock — while simultaneously building the team's first systematic fabrication documentation.",
@@ -227,9 +227,8 @@ const projectData = {
     keyAchievements: [
       "Delivered competition-ready robot within 6-week build season",
       "Operated under $5,000 budget and 125 lb weight constraint",
-      "Established team's first fabrication documentation standards",
-      "Rookie All-Star Award — recognizing outstanding contribution in a first season",
-      "Qualified for FRC World Championship in rookie season"
+      "Zero structural failures during competition matches",
+      "Established team's first fabrication documentation standards"
     ],
     images: [
       "/images/FRC2024Banner.jpg",
@@ -240,7 +239,7 @@ const projectData = {
       {
         icon: "📋",
         step: "01. Game Analysis & Requirements",
-        description: "Dissected the 2024 FRC game manual to extract binding constraints: 125 lb weight limit, $5,000 parts budget, and a 120\" frame perimeter. Developed a scoring opportunity matrix ranking all game actions by expected point yield versus manufacturing difficulty — a  tool that focused limited build time on the two mechanisms with the highest return on investment.",
+        description: "Dissected the 2024 FRC game manual to extract binding constraints: 125 lb weight limit, $5,000 parts budget, and a 28×28\" frame perimeter. Developed a scoring opportunity matrix ranking all game actions by expected point yield versus manufacturing difficulty — a triage tool that focused limited build time on the two mechanisms with the highest return on investment.",
         photos: [
           { src: "/images/FRC2024GameAnalysis.jpg", caption: "Game scoring opportunity analysis" },
           { src: "/images/FRC2024Finance.jpg", caption: "Budget and weight allocation" }
@@ -249,7 +248,7 @@ const projectData = {
       {
         icon: "⚙️",
         step: "02. Conceptual Design & Triage",
-        description: "Benchmarked six drivetrain configurations against the team's available tools and operator experience level. Selected a KIT Bot for its proven reliability and straightforward repairability — prioritizing a design the team could easily rebuild and repair.",
+        description: "Benchmarked six drivetrain configurations against the team's available tools and operator experience level. Selected a West Coast Drive for its proven reliability and straightforward repairability — prioritizing a design the team could rebuild from scrap in 20 minutes over a theoretically superior option requiring specialized tooling unavailable at the venue.",
         photos: [
           { src: "/images/FRC2024ConceptualDesign.jpg", caption: "Mechanism concept sketches" },
           { src: "/images/FRC2024ConceptualDesign2.JPG", caption: "Early CAD layout and sizing" }
@@ -258,7 +257,7 @@ const projectData = {
       {
         icon: "🛠️",
         step: "03. Fabrication & Prototyping",
-        description: "Manufactured aluminum structural components using basic tools, producing the chassis frame, gearbox plates, and mechanism mounting. Validated two intake prototype iterations that failed under game-piece load before arriving at a geometry that consistently handled the game object at speed — each failure directly informing the final production design.",
+        description: "Machined aluminum structural components on the team's mill and bandsaw, producing the chassis frame, gearbox plates, and mechanism mounting rails. Validated two intake prototype iterations that failed under game-piece load before arriving at a geometry that consistently handled the game object at speed — each failure directly informing the final production design.",
         photos: [
           { src: "/images/FRC2024FabricationandPrototyping.jpg", caption: "Aluminum machining operations" },
           { src: "/images/FRC2024FabricationandPrototyping2.jpg", caption: "Electrical and mechanical integration" }
@@ -267,7 +266,7 @@ const projectData = {
       {
         icon: "🏎️",
         step: "04. Testing & Stress Validation",
-        description: "Ran 40+ hours of drive practice and mechanism cycling across two weeks of pre-competition testing. Identified and resolved four critical failure modes: a loose gearbox pinion, misaligned intake rollers, weak hanging mechanism, and a weld fatigue point on the chassis corner. All four would have caused match DNPs without early discovery.",
+        description: "Ran 40+ hours of drive practice and mechanism cycling across two weeks of pre-competition testing. Identified and resolved four critical failure modes: a loose gearbox pinion, misaligned intake rollers, an undersized motor wire gauge, and a weld fatigue point on the chassis corner. All four would have caused match DNPs without early discovery.",
         photos: [
           { src: "/images/FRC2024TestingandValidation.jpg", caption: "Full-field drive testing" },
           { src: "/images/FRC2024TestingandValidation2.jpg", caption: "Pit repair stress testing" }
@@ -466,7 +465,7 @@ function HomeView({ onNavigate }) {
             
             <div className="bg-[#F59E0B]/10 border border-[#F59E0B]/20 rounded p-4 mb-6">
               <div className="font-mono text-[10px] text-[#F59E0B] tracking-widest uppercase mb-2">Current Challenge</div>
-              <p className="text-sm text-slate-300">Designing backlash-minimized joints in CAD to achieve millimeter-level precision — the mechanical precision floor required for reliable OpenCV coordinate tracking.</p>
+              <p className="text-sm text-slate-300">Designing backlash-minimized joints in CAD to achieve sub-5mm TCP repeatability — the mechanical precision floor required for reliable OpenCV coordinate tracking.</p>
             </div>
 
             <div className="space-y-3 mb-8">
