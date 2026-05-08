@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
 
+const img = (path) => `${import.meta.env.BASE_URL}${(path || '').replace(/^\//, '')}`;
+
 {/* ========================================= */}
 {/* DATA STORAGE (EASY EDIT LISTS)            */}
 {/* ========================================= */}
+
 const skills = [
   'SolidWorks', 'FEA / Simulation', 'Mechanical Design', 'ESP32 / Arduino', 
   'Raspberry Pi', 'Python', 'C++', '3D Printing', 'Kenesto CAD VCS', 'OpenCV'
@@ -47,7 +50,8 @@ const projectData = {
         description: "Actively designing the structural arm geometry in SolidWorks. Focused on three precision outcomes: minimizing joint backlash to maintain millimeter-level precision, maximizing link rigidity to eliminate deflection error, and positioning the camera mount to maintain unobstructed workspace visibility across the full range of motion.",
         photos: [
           { src: "/images/opencv-placeholder.svg", caption: "Active CAD model" },
-          { src: "/images/opencv-placeholder.svg", caption: "Joint linkage design" }
+          { src: "/images/opencv-placeholder.svg"
+            , caption: "Joint linkage design" }
         ]
       },
       {
@@ -450,7 +454,7 @@ function HomeView({ onNavigate }) {
         <div className="bg-[#161B27] border border-[#F59E0B]/30 rounded-lg overflow-hidden grid md:grid-cols-2">
           <div className="bg-gradient-to-br from-[#0F1117] to-[#1a2035] border-b md:border-b-0 md:border-r border-[#F59E0B]/20 min-h-[300px] flex items-center justify-center relative group">
             <img 
-              src="/images/opencv-placeholder.svg" 
+              src={img("/images/opencv-placeholder.svg")} 
               alt="OpenCV Robotic Arm — Concept Schematic" 
               className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity"
               onError={(e) => { e.target.style.display = 'none'; }}
@@ -503,12 +507,12 @@ function HomeView({ onNavigate }) {
               {/* Banner Image Area — fixed height, always object-cover with dark bg fallback */}
               <div className="h-56 w-full bg-[#0D1018] relative overflow-hidden border-b border-[#1E2940]">
                 <img 
-                  src={project.images[0] || "/jm-logo.png"} 
+                  src={img(project.images[0] || "/jm-logo.png")} 
                   alt={project.title}
                   className="absolute inset-0 w-full h-full object-cover transition-all duration-500 opacity-60 group-hover:opacity-100 group-hover:scale-105"
                   onError={(e) => { 
                     e.target.onerror = null; 
-                    e.target.src = '/jm-logo.png'; 
+                    e.target.src = img('/jm-logo.png'); 
                     e.target.className="absolute inset-0 w-full h-full object-contain p-12 opacity-40"; 
                   }}
                 />
@@ -698,7 +702,7 @@ function ProjectView({ project, onBack }) {
         <div className="relative w-full aspect-video md:h-[500px] bg-[#0D1018] rounded-2xl overflow-hidden border border-[#1E2940] group mb-24 shadow-2xl">
             {/* Blurred backdrop fills container regardless of image aspect ratio */}
             <img
-              src={project.images[currentImageIndex]}
+              src={img(project.images[currentImageIndex])}
               alt=""
               aria-hidden="true"
               className="absolute inset-0 w-full h-full object-cover scale-110 blur-3xl opacity-40"
@@ -707,12 +711,12 @@ function ProjectView({ project, onBack }) {
             <div className="absolute inset-0 bg-[#0D1018]/30"></div>
             {/* Foreground image: contained, never cropped */}
             <img 
-              src={project.images[currentImageIndex]} 
+              src={img(project.images[currentImageIndex])} 
               alt={project.title}
               className="relative w-full h-full object-contain"
               onError={(e) => { 
                 e.target.onerror = null; 
-                e.target.src = '/jm-logo.png'; 
+                e.target.src = img('/jm-logo.png'); 
                 e.target.className = "relative w-full h-full object-contain p-16 opacity-30";
               }}
             />
@@ -781,7 +785,7 @@ function ProjectView({ project, onBack }) {
                     <div className="w-full h-56 relative overflow-hidden bg-[#0D1018]">
                       {/* Blurred backdrop: same image, fills entire container with cover, blurred + dimmed */}
                       <img
-                        src={photo.src || "/jm-logo.png"}
+                        src={img(photo.src || "/jm-logo.png")}
                         alt=""
                         aria-hidden="true"
                         className="absolute inset-0 w-full h-full object-cover scale-110 blur-2xl opacity-50"
@@ -791,12 +795,12 @@ function ProjectView({ project, onBack }) {
                       <div className="absolute inset-0 bg-[#0D1018]/40"></div>
                       {/* Foreground image: contained, never cropped, never stretched */}
                       <img 
-                        src={photo.src || "/jm-logo.png"} 
+                        src={img(photo.src || "/jm-logo.png")} 
                         alt={photo.caption}
                         className="absolute inset-0 w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
                         onError={(e) => { 
                           e.target.onerror = null; 
-                          e.target.src = '/jm-logo.png'; 
+                          e.target.src = img('/jm-logo.png'); 
                           e.target.className="absolute inset-0 w-full h-full object-contain p-10 opacity-30"; 
                         }}
                       />
