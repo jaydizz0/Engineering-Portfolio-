@@ -12,13 +12,13 @@ const skills = [
 ];
 
 const projectData = {
-  opencv: {
-    title: "Computer Vision Robotic Arm",
-    label: "Project",
-    role: "Mechanical & Systems Design",
+  cprtV2: {
+    title: "CPRT Rover Arm V2",
+    label: "2026 Design Team",
+    role: "Arm Lead",
     status: "ACTIVE WIP",
-    overview: "Engineering a closed-loop autonomous robotic arm driven by a Raspberry Pi + OpenCV vision pipeline. The system translates live 2D camera coordinates into precise servo actuation — targeting sub-5mm positional accuracy for real-time object classification and retrieval.",
-    techStack: ["Raspberry Pi 4", "OpenCV", "Python", "SolidWorks", "PID Control", "Servo PWM", "3D Printing"],
+    overview: "Leading the redesign of the Carleton Planetary Robotics Team (CPRT) rover arm for the 2026 season. Building on the V1 arm, this year's focus is refining the system for autonomous operation — where precision is paramount — and re-architecting the arm's geometry and joints to support a full inverse kinematics control stack.",
+    techStack: ["SolidWorks", "Inverse Kinematics", "FEA / Simulation", "Autonomy", "Harmonic Drives", "GD&T"],
     keyAchievements: [
 
     ],
@@ -27,49 +27,35 @@ const projectData = {
     ],
     workflow: [
       {
-        icon: "👁️",
-        step: "01. Architecture Definition",
-        description: "Defined the end-to-end system architecture linking a Raspberry Pi camera feed through an OpenCV perception layer to a real-time servo actuation loop. Established coordinate transformation math to convert 2D pixel detections into 3D workspace positions, forming the control-theory backbone before writing a single line of code.",
+        icon: "🔍",
+        step: "01. V1 Review & Requirements [CURRENT]",
+        description: "Evaluating the V1 arm's performance to identify sources of positional error and define the precision targets required for reliable autonomous operation. These findings set the requirements for the V2 redesign.",
         photos: [
-          { src: "/images/opencv-placeholder.svg", caption: "System architecture concept" },
-          { src: "/images/opencv-placeholder.svg", caption: "Control flow diagram" }
-        ]
-      },
-      {
-        icon: "⚙️",
-        step: "02. Component & Torque Specs",
-        description: "Performed static and dynamic torque calculations across all three joints under worst-case payload and maximum reach conditions. Sized servo selection with a 2× safety margin and engineered an isolated power rail to protect Raspberry Pi logic from servo-induced voltage transients — preventing the most common cause of single-board computer failure in actuated systems.",
-        photos: [
-          { src: "/images/opencv-placeholder.svg", caption: "Torque budget analysis" },
-          { src: "/images/opencv-placeholder.svg", caption: "Servo selection matrix" }
+          { src: "/images/opencv-placeholder.svg", caption: "V1 design review" }
         ]
       },
       {
         icon: "📐",
-        step: "03. Mechanical Design [CURRENT]",
-        description: "Actively designing the structural arm geometry in SolidWorks. Focused on three precision outcomes: minimizing joint backlash to maintain millimeter-level precision, maximizing link rigidity to eliminate deflection error, and positioning the camera mount to maintain unobstructed workspace visibility across the full range of motion.",
+        step: "02. Precision-Focused Redesign [PLANNED]",
+        description: "Redesigning the arm's joints and structure with precision as the primary driver — minimizing backlash and deflection so that the arm's physical position matches its commanded position as closely as possible.",
         photos: [
-          { src: "/images/opencv-placeholder.svg", caption: "Active CAD model" },
-          { src: "/images/opencv-placeholder.svg"
-            , caption: "Joint linkage design" }
+          { src: "/images/opencv-placeholder.svg", caption: "V2 CAD concept" }
         ]
       },
       {
-        icon: "⚡",
-        step: "04. Assembly & Wiring [PLANNED]",
-        description: "Next phase: fabricate 3D-printed structural components, mount and calibrate servos to zero-reference positions, and build a common-ground power distribution circuit with appropriately rated wiring gauges. Will validate mechanical range of motion against the kinematic model before any software integration begins.",
+        icon: "🦾",
+        step: "03. Inverse Kinematics Implementation [PLANNED]",
+        description: "Designing the arm's kinematic layout around a clean inverse kinematics solution, allowing end-effector targets to be commanded in workspace coordinates rather than individual joint angles.",
         photos: [
-          { src: "/images/opencv-placeholder.svg", caption: "Fabrication preparation" },
-          { src: "/images/opencv-placeholder.svg", caption: "Wiring architecture plan" }
+          { src: "/images/opencv-placeholder.svg", caption: "Kinematic model" }
         ]
       },
       {
-        icon: "💻",
-        step: "05. OpenCV Integration [PLANNED]",
-        description: "Final phase integrates the full perception-to-actuation pipeline: HSV-masked color detection, contour centroid extraction, and a PID-based servo control loop that drives the end-effector toward detected object coordinates. Planned milestones include achieving consistent pick cycles across multiple object geometries and surface materials.",
+        icon: "🤖",
+        step: "04. Autonomy Integration [PLANNED]",
+        description: "Integrating the redesigned arm with the rover's autonomy system to perform competition tasks without direct operator control.",
         photos: [
-          { src: "/images/opencv-placeholder.svg", caption: "Vision tracking prototype" },
-          { src: "/images/opencv-placeholder.svg", caption: "Final integration target" }
+          { src: "/images/opencv-placeholder.svg", caption: "Autonomy integration target" }
         ]
       }
     ]
@@ -455,7 +441,7 @@ function HomeView({ onNavigate }) {
           <div className="bg-gradient-to-br from-[#0F1117] to-[#1a2035] border-b md:border-b-0 md:border-r border-[#F59E0B]/20 min-h-[300px] flex items-center justify-center relative group">
             <img 
               src={img("/images/opencv-placeholder.svg")} 
-              alt="OpenCV Robotic Arm — Concept Schematic" 
+              alt="CPRT Rover Arm V2" 
               className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity"
               onError={(e) => { e.target.style.display = 'none'; }}
             />
@@ -465,22 +451,22 @@ function HomeView({ onNavigate }) {
           </div>
 
           <div className="p-8">
-            <h3 className="text-2xl font-bold text-slate-100 mb-1">Computer Vision Robotic Arm</h3>
-            <p className="text-[#F59E0B] text-sm mb-6">Autonomous Object Detection & Retrieval System</p>
+            <h3 className="text-2xl font-bold text-slate-100 mb-1">CPRT Rover Arm V2</h3>
+            <p className="text-[#F59E0B] text-sm mb-6">Arm Lead — Carleton Planetary Robotics Team</p>
             
             <div className="bg-[#F59E0B]/10 border border-[#F59E0B]/20 rounded p-4 mb-6">
               <div className="font-mono text-[10px] text-[#F59E0B] tracking-widest uppercase mb-2">Current Challenge</div>
-              <p className="text-sm text-slate-300">Designing backlash-minimized joints in CAD to achieve millimeter-level precision — the mechanical precision floor required for reliable OpenCV coordinate tracking.</p>
+              <p className="text-sm text-slate-300">Redesigning the arm for autonomous operation, where precision is of the utmost importance — and re-architecting the joints and geometry to support inverse kinematics.</p>
             </div>
 
             <div className="space-y-3 mb-8">
-              <div className="flex items-center gap-3 text-sm"><span className="text-emerald-400">✓</span> <span className="text-slate-500 line-through">Kinematic model & torque budget</span></div>
-              <div className="flex items-center gap-3 text-sm font-semibold text-[#F59E0B]"><span className="animate-spin inline-block">⟳</span> <span>Mechanical CAD Design</span></div>
-              <div className="flex items-center gap-3 text-sm text-slate-500"><span>○</span> <span>Vision Integration (OpenCV)</span></div>
+              <div className="flex items-center gap-3 text-sm font-semibold text-[#F59E0B]"><span className="animate-spin inline-block">⟳</span> <span>V1 Review & Requirements</span></div>
+              <div className="flex items-center gap-3 text-sm text-slate-500"><span>○</span> <span>Precision-Focused Redesign</span></div>
+              <div className="flex items-center gap-3 text-sm text-slate-500"><span>○</span> <span>Inverse Kinematics & Autonomy</span></div>
             </div>
 
             <button 
-              onClick={() => onNavigate('opencv')}
+              onClick={() => onNavigate('cprtV2')}
               className="text-[#F59E0B] font-mono text-xs border border-[#F59E0B]/30 hover:bg-[#F59E0B]/10 px-4 py-2 rounded transition-colors"
             >
               View Project Specs →
@@ -545,7 +531,7 @@ function HomeView({ onNavigate }) {
                 <h3 className="text-2xl font-bold text-white mb-1">{project.title}</h3>
                 <p className="text-xs text-[#F59E0B] font-mono mb-4">{project.role}</p>
 
-                <p className="text-slate-400 text-sm leading-relaxed mb-5 flex-grow line-clamp-4">
+                <p className="text-slate-400 text-sm leading-relaxed mb-5 flex-grow line-clamp-5">
                   {project.overview}
                 </p>
 
